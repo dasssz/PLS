@@ -24,11 +24,13 @@
             }
 
             document.querySelector('#budget1').textContent = budget1;
-            
-            window.postMessage({ budget2: budget2 }, 'https://dasssz.github.io/PLS/receiver.html');
+
+            // Send message to the receiver page
+            var receiverWindow = window.open('https://yourusername.github.io/receiver.html');
+            receiverWindow.postMessage({ budget2: budget2 }, 'https://yourusername.github.io');
         }
 
-        
+        // Function to get URL parameters
         function getParameterByName(name, url = window.location.href) {
             name = name.replace(/[\[\]]/g, '\\$&');
             var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
