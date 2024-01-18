@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="website" id="second-website">
+            <h1>receiver</h1>
+            <p>balance: ₱<span id="budget2">0</span></p>
+        </div>
+    </div>
+    <script>
+        // Listen for messages from the sender page
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.budget2) {
+                document.querySelector('#budget2').textContent = event.data.budget2;
+            }
+        });
+    </script>
+</body>
+</html>

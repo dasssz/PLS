@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="website" id="first-website">
+            <h1>sender</h1>
+            <p>Balance: ₱<span id="budget1">500</span></p>
+            <button onclick="sendMoney()">Send ₱135</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function sendMoney() {
+            var budget1 = parseInt(document.querySelector('#budget1').textContent);
+            var budget2 = parseInt(getParameterByName('budget2'));
+
+            if (budget1 >= 135) {
+                budget1 -= 135;
+                budget2 += 135;
+            } else {
+                alert("Insufficient budget on First Website.");
+            }
+
+            document.querySelector('#budget1').textContent = budget1;
+            // Send message to the receiver page
+            window.parent.postMessage({ budget2: budget2 }, '*');
+        }
+
+        // Function to get URL parameters
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    </script>
+</body>
+</html>
